@@ -427,3 +427,22 @@ Returns the specified comment.
     **Content:** `{ error : "comment doesn't exist" }`  
     OR
   - **Code:** 401
+
+## \*\*GET /videos/:id/products
+
+Returns the specified product video.
+
+- **URL Params**  
+  _Required:_ `id=[integer]`
+- **Data Params**  
+  None
+- **Headers**  
+  Content-Type: application/json
+- **Success Response:**
+- **Code:** 200  
+  **Content:** `{ <video_object> }`
+- **Error Response:**
+  - **Code:** 404  
+    **Content:** `{ error : "video product doesn't exist" }`  
+    OR
+  - **Code:** 401
