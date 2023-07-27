@@ -285,7 +285,7 @@ Returns all videos in the system.
 
 ## **GET /videos/:id**
 
-Returns the specified product.
+Returns the specified video.
 
 - **URL Params**  
   _Required:_ `id=[integer]`
@@ -368,5 +368,62 @@ Deletes the specified video.
 - **Error Response:**
   - **Code:** 404  
     **Content:** `{ error : "Video doesn't exist" }`  
+    OR
+  - **Code:** 401
+
+#Comment
+
+- Comment object
+
+```
+{
+
+  videoId: mongoose.Schema.Types.ObjectId;
+  username: string,
+  comment: string
+}
+```
+
+## **POST /videos/:id/comments**
+
+Creates a new comment in video and returns the new object.
+
+- **URL Params**  
+  None
+- **Data Params**
+
+```
+
+{
+
+  videoId: mongoose.Schema.Types.ObjectId;
+  username: string,
+  comment: string
+}
+
+```
+
+- **Headers**  
+  Content-Type: application/json
+- **Success Response:**
+- **Code:** 200  
+  **Content:** `{ <comment_object> }`
+
+## \*\*GET /videos/:id/comments
+
+Returns the specified comment.
+
+- **URL Params**  
+  _Required:_ `id=[integer]`
+- **Data Params**  
+  None
+- **Headers**  
+  Content-Type: application/json
+- **Success Response:**
+- **Code:** 200  
+  **Content:** `{ <comment_object> }`
+- **Error Response:**
+  - **Code:** 404  
+    **Content:** `{ error : "comment doesn't exist" }`  
     OR
   - **Code:** 401
