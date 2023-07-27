@@ -244,3 +244,129 @@ Deletes the specified product.
     **Content:** `{ error : "Product doesn't exist" }`  
     OR
   - **Code:** 401
+
+#Video
+
+- Video object
+
+```
+{
+  videoTitle: string
+  url: string;
+  productId: mongoose.Schema.Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+## **GET /videos**
+
+Returns all videos in the system.
+
+- **URL Params**  
+  None
+- **Data Params**  
+  None
+- **Headers**  
+  Content-Type: application/json
+- **Success Response:**
+- **Code:** 200  
+  **Content:**
+
+```
+{
+  videos: [
+           {<video_object>},
+           {<video_object>},
+           {<video_object>}
+         ]
+}
+```
+
+## **GET /videos/:id**
+
+Returns the specified product.
+
+- **URL Params**  
+  _Required:_ `id=[integer]`
+- **Data Params**  
+  None
+- **Headers**  
+  Content-Type: application/json
+- **Success Response:**
+- **Code:** 200  
+  **Content:** `{ <video_object> }`
+- **Error Response:**
+  - **Code:** 404  
+    **Content:** `{ error : "video doesn't exist" }`  
+    OR
+  - **Code:** 401
+
+## **POST /videos**
+
+Creates a new video and returns the new object.
+
+- **URL Params**  
+  None
+- **Data Params**
+
+```
+
+{
+  videoTitle: string
+  url: string;
+  productId: mongoose.Schema.Types.ObjectId;
+}
+
+```
+
+- **Headers**  
+  Content-Type: application/json
+- **Success Response:**
+- **Code:** 200  
+  **Content:** `{ <video_object> }`
+
+## **PATCH /videos/:id**
+
+Updates fields on the specified video and returns the updated object.
+
+- **URL Params**  
+  _Required:_ `id=[integer]`
+- **Data Params**
+
+```
+  {
+  videoTitle: string
+  url: string;
+  productId: mongoose.Schema.Types.ObjectId;
+}
+```
+
+- **Headers**  
+  Content-Type: application/json
+- **Success Response:**
+- **Code:** 200  
+  **Content:** `{ <video_object> }`
+- **Error Response:**
+  - **Code:** 404  
+    **Content:** `{ error : "Video doesn't exist" }`  
+    OR
+  - **Code:** 401
+
+## **DELETE /videos/:id**
+
+Deletes the specified video.
+
+- **URL Params**  
+  _Required:_ `id=[integer]`
+- **Data Params**  
+  None
+- **Headers**  
+  Content-Type: application/json
+- **Success Response:**
+  - **Code:** 204
+- **Error Response:**
+  - **Code:** 404  
+    **Content:** `{ error : "Video doesn't exist" }`  
+    OR
+  - **Code:** 401
