@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
 const videoRoutes = require('./routes/videos');
-import cors from 'cors';
+const cors = require('cors')
 
 
 const mongoString = process.env.DATABASE_URL;
