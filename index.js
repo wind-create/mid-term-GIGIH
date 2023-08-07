@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
 const videoRoutes = require('./routes/videos');
+import cors from 'cors';
 
 const mongoString = process.env.DATABASE_URL;
 const port = process.env.PORT;
@@ -18,7 +19,7 @@ mongoose
 const app = express();
 
 app.use(bodyParser.json());
-
+app.use(cors());
 // Routes user
 app.use('/users', userRoutes);
 // Routes product
