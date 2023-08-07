@@ -7,7 +7,7 @@ const productRoutes = require('./routes/products');
 const videoRoutes = require('./routes/videos');
 
 const mongoString = process.env.DATABASE_URL;
-const port = 3000;
+const port = process.env.PORT;
 
 // Connect to MongoDB
 mongoose
