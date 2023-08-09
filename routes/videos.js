@@ -27,3 +27,5 @@ router.get('/:id/products', videoController.getProductsFromVideo);
 router.get('/:id/comments', videoController.getCommentsFromVideo);
 
 module.exports = router;
+
+
