@@ -1,33 +1,31 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const userRoutes = require('./routes/users');
-const productRoutes = require('./routes/products');
-const videoRoutes = require('./routes/videos');
-const cors = require('cors')
-
-
-const mongoString = process.env.DATABASE_URL;
-const port = process.env.PORT;
-
-// Connect to MongoDB
-mongoose
-  .connect(mongoString, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.log(err));
-
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 const app = express();
+const port = process.env.PORT;
+require("dotenv").config();
 
-app.use(bodyParser.json());
+const DB_URL = process.env.DATABASE_URL;
+mongoose.connect(DB_URL);
+const db = mongoose.connection;
+
+db.on("error", (error) => {
+  console.log(error);
+});
+
+db.once("connected", () => {
+  console.log("Database connected");
+});
+
 app.use(cors());
-// Routes user
-app.use('/users', userRoutes);
-// Routes product
-app.use('/products', productRoutes);
-// Routes video
-app.use('/videos', videoRoutes);
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.use(express.json());
+
+const videoRoutes = require("./routes/video");
+const productRoutes = require("./routes/product"); 
+
+app.use("/videos", videoRoutes);
+app.use("/products", productRoutes);
+
+app.listen(8000, () => {
+  console.log(`Server Started at http://localhost:${port}`);
 });
