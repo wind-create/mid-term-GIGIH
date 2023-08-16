@@ -1,8 +1,36 @@
 const Video = require("../models/video");
-const Product = require('../models/product');
+const Product = require("../models/product");
 const Comment = require("../models/comment");
 
-// Get all videos
+
+const getProductsFromVideo = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const video = await Video.findById(id).populate("products");
+    if (!video) {
+      return res.status(404).json({ message: "Video not found" });
+    }
+    return res.status(200).json(video);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+const getCommentsFromVideo = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const video = await Video.findById(id);
+    if (!video) {
+      return res.status(404).json({ message: "Video not found" });
+    }
+
+    const comments = await Comment.find({ video: id });
+    return res.status(200).json({ comments });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 const getVideoLists = async (req, res) => {
   try {
     const videos = await Video.find();
@@ -12,7 +40,6 @@ const getVideoLists = async (req, res) => {
   }
 };
 
-// Get a video
 const getVideoDetails = async (req, res) => {
   const { id } = req.params;
   try {
@@ -28,37 +55,6 @@ const getVideoDetails = async (req, res) => {
   }
 };
 
-// Get product by video
-const getProductsFromVideo = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const video = await Video.findById(id).populate("products");
-    if (!video) {
-      return res.status(404).json({ message: "Video not found" });
-    }
-    return res.status(200).json(video.products);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-// Get comment by video
-const getCommentsFromVideo = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const video = await Video.findById(id);
-    if (!video) {
-      return res.status(404).json({ message: "Video not found" });
-    }
-
-    const comments = await Comment.find({ video: video._id });
-    return res.status(200).json(comments);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-// Post a video
 const postVideo = async (req, res) => {
   try {
     const video = await Video.create(req.body);
@@ -69,7 +65,6 @@ const postVideo = async (req, res) => {
   }
 };
 
-// Post a comment from a video by id
 const postCommentFromVideo = async (req, res) => {
   try {
     const { id } = req.params;
@@ -91,7 +86,6 @@ const postCommentFromVideo = async (req, res) => {
   }
 };
 
-// Edit a video
 const editVideo = async (req, res) => {
   const { id } = req.params;
   try {
@@ -107,7 +101,6 @@ const editVideo = async (req, res) => {
   }
 };
 
-// Delete a video
 const deleteVideo = async (req, res) => {
   const { id } = req.params;
   try {

@@ -1,6 +1,5 @@
 const Comment = require("../models/comment");
 
-// Post a comment from a video
 const commentPost = async (req, res) => {
   try {
     const comment = await Comment.create(req.body);

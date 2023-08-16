@@ -10,6 +10,16 @@ const videoSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
+    videoThumbnail: {
+      required: true,
+      type: String,
+    },
+    videoCategory: [
+      {
+        required: true,
+        type: String,
+      },
+    ],
     products: [
       {
         type: mongoose.Schema.Types.ObjectId,
